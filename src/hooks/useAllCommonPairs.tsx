@@ -3,17 +3,24 @@ import { useCallback } from "react";
 import { ChainId, Currency, ETHER, Fetcher, Pair, Token, WETH } from "@sushiswap/sdk";
 import { ethers } from "ethers";
 
-const DAI = new Token(ChainId.MAINNET, "0x6B175474E89094C44Da98b954EedeAC495271d0F", 18, "DAI", "Dai Stablecoin");
-const USDC = new Token(ChainId.MAINNET, "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48", 6, "USDC", "USD//C");
-const USDT = new Token(ChainId.MAINNET, "0xdAC17F958D2ee523a2206206994597C13D831ec7", 6, "USDT", "Tether USD");
-const SUSHI = new Token(ChainId.MAINNET, "0x6B3595068778DD592e39A122f4f5a5cF09C90fE2", 18, "SUSHI", "SushiToken");
-const YAM = new Token(ChainId.MAINNET, "0x0e2298E3B3390e3b945a5456fBf59eCc3f55DA16", 18, "YAM", "YAM");
-const AMPL = new Token(ChainId.MAINNET, "0xD46bA6D942050d489DBd938a2C909A5d5039A161", 9, "AMPL", "Ampleforth");
 
-const BASES_TO_CHECK_TRADES_AGAINST = [WETH[ChainId.MAINNET], DAI, USDC, USDT, SUSHI, YAM];
-const CUSTOM_BASES = {
-    [AMPL.address]: [DAI, WETH[ChainId.MAINNET]]
-};
+// TODO UPDATE WITH ALL THE NECESSARY PAIRS
+export const tDAI = new Token(ChainId.BSCTESTNET, '0xec5dcb5dbf4b114c9d0f65bccab49ec54f6a0867', 18, 'DAI', 'Dai Stablecoin')
+export const tBUSD = new Token(ChainId.BSCTESTNET, '0xed24fc36d5ee211ea25a80239fb8c4cfd80f12ee', 18, 'BUSD', 'Binance USD')
+export const tUSDT = new Token(ChainId.BSCTESTNET, '0x337610d27c682e347c9cd60bd4b3b107c9d34ddd', 18, 'USDT', 'Tether USD')
+export const tUSDC = new Token(ChainId.BSCTESTNET, '0x64544969ed7ebf5f083679233325356ebe738930', 18, 'USDC', 'USD Coin')
+
+export const DAI = new Token(ChainId.MAINNET, '0x1af3f329e8be154074d8769d1ffa4ee058b1dbc3', 18, 'DAI', 'Dai Stablecoin')
+export const BUSD = new Token(ChainId.MAINNET, '0xe9e7cea3dedca5984780bafc599bd69add087d56', 18, 'BUSD', 'Binance USD')
+export const USDT = new Token(ChainId.MAINNET, '0x55d398326f99059ff775485246999027b3197955', 18, 'USDT', 'Tether USD')
+export const USDC = new Token(ChainId.MAINNET, '0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d', 18, 'USDC', 'USD Coin')
+export const QUSD = new Token(ChainId.MAINNET, '0xb8c540d00dd0bf76ea12e4b4b95efc90804f924e', 18, 'QUSD', 'Qian Stablecoin')
+
+// TODO check if we need WETH chainID mainnet here if bnb is not really traded often here, also the tTokens for testnet
+const BASES_TO_CHECK_TRADES_AGAINST = [WETH[ChainId.MAINNET], BUSD, DAI, USDC, USDT];
+// const CUSTOM_BASES = {
+//     [AMPL.address]: [DAI, WETH[ChainId.MAINNET]]
+// };
 
 function wrappedCurrency(currency: Currency | undefined): Token | undefined {
     return currency === ETHER ? WETH[ChainId.MAINNET] : currency instanceof Token ? currency : undefined;
